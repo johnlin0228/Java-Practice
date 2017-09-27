@@ -9,7 +9,13 @@ public class MyStock {
 	public static void main(String[] args) {
 
 		int numberOfStocks;
-		
+		String myName = null;
+		float myPurchasePrice = 0;
+		float myCurrentPrice = 0;
+		int myNumberOfShares = 0;
+		float myConversionRate = 0;
+
+
 		Scanner keyboard = new Scanner(System.in);
 		// input the number of stocks.
 		System.out.println("Please enter the number of stock " + 
@@ -31,43 +37,48 @@ public class MyStock {
 		// size equal to number of stocks the user entered.
 		ForeignStockHolding[] myStocks = new ForeignStockHolding[numberOfStocks];
 
-
-
 		System.out.println("An array called stocks have been set up, the array's size is: " + numberOfStocks);
 		System.out.println("That's mean array \"myStocks\" include " + numberOfStocks + " stocks\n");
-
-		for (int index = 0; index < numberOfStocks; index++){
+		for(int index = 0; index < numberOfStocks; index++) {
+			
+			System.out.println("Stock " + (index+1) + ":");
+			
+			ForeignStockHolding foreignStockHolding  = new ForeignStockHolding(myName,myPurchasePrice,myCurrentPrice,myNumberOfShares,myConversionRate);
 
 			System.out.println("Please enter the name of stock.");
-			String myName = "";
-			myName = keyboard.nextLine();
-			if(myName != null) {
-				myStocks[index].setCompanyName(myName);
-			}else {System.out.println("You not enter anything, please enter the name of stock.");}
-			
+			myName = keyboard.next();
+			foreignStockHolding.setCompanyName(myName);
+			//		System.out.println(foreignStockHolding.getCompanyName());
 
 			System.out.println("Please enter the purchase price of stock.");
-			float myPurchasePrice = keyboard.nextFloat();
-			myStocks[index].setPurchaseSharePrice(myPurchasePrice);
+			myPurchasePrice = keyboard.nextFloat();
+			foreignStockHolding.setPurchaseSharePrice(myPurchasePrice);
+			//		System.out.println(foreignStockHolding.getPurchaseSharePrice());
 
 			System.out.println("Please enter the current price of stock.");
-			float myCurrentPrice = keyboard.nextFloat();
-			myStocks[index].setCurrentSharePrice(myCurrentPrice);
+			myCurrentPrice = keyboard.nextFloat();
+			foreignStockHolding.setCurrentSharePrice(myCurrentPrice);
+			//		System.out.println(foreignStockHolding.getCurrentSharePrice());
 
 			System.out.println("Please enter the number of shares.");
-			int myNumberOfShares = keyboard.nextInt();
-			myStocks[index].setNumberOfShares(myNumberOfShares);
+			myNumberOfShares = keyboard.nextInt();
+			foreignStockHolding.setNumberOfShares(myNumberOfShares);
+			//		System.out.println(foreignStockHolding.getNumberOfShares());
 
 			System.out.println("Please enter the conversion rate. (Note: same currency please enter 1) ");
-			float myConversionRate = keyboard.nextFloat();
+			myConversionRate = keyboard.nextFloat();
 			while(myConversionRate <= 0) {
 				System.out.println("your conversion rate is not correct!");
 				System.out.println("Please enter the conversion rate.");
 				myConversionRate = keyboard.nextFloat();
 			}
-			myStocks[index].setConversionRate(myConversionRate);
+			foreignStockHolding.setConversionRate(myConversionRate);
+			//		System.out.println(foreignStockHolding.getConversionRate());
+			
+			myStocks[index] = foreignStockHolding;
+			System.out.println("");
+		
 		}
-
 
 		System.out.println("---Display all stock infotmation before sorting---");
 		System.out.println("");
@@ -78,18 +89,18 @@ public class MyStock {
 			System.out.println("");
 		}
 		
-		System.out.println("---Display all stock infotmation After sorting---");
-		System.out.println("");
-		
-		// Sort the stocks with their Comparable interface methods.
-//		Arrays.sort(stocks);
-		Arrays.sort(myStocks,Collections.reverseOrder());
-		
-		// Display all companies information	 after sorting		
-		for(int index = 0; index < numberOfStocks; index++) {
-			System.out.println(myStocks[index]);
-			System.out.println("");
-		}
+				System.out.println("---Display all stock infotmation After sorting---");
+				System.out.println("");
+		//
+		//		// Sort the stocks with their Comparable interface methods.
+		//		//		Arrays.sort(stocks);
+		//		Arrays.sort(myStocks,Collections.reverseOrder());
+		//
+		//		// Display all companies information	 after sorting		
+		//		for(int index = 0; index < numberOfStocks; index++) {
+		//			System.out.println(myStocks[index]);
+		//			System.out.println("");
+		//		}
 
 	}
 
